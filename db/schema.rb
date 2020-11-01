@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(version: 2020_11_01_201720) do
     t.string "name"
     t.string "address"
     t.string "google_place_id"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
   end
 
   add_foreign_key "ratings", "stores"
